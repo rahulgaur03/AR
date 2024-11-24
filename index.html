@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Emoji Dance</title>
+  <title>AR Menu Card Interaction</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
   <style>
@@ -14,13 +14,31 @@
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro Marker to trigger AR -->
     <a-marker preset="hiro">
-      <!-- Emoji: Yellow sphere with rotation animation -->
-      <a-sphere position="0 0.5 0" radius="0.3" color="yellow"
-        animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 1000">
-        <!-- Emoji eyes -->
-        <a-sphere position="-0.1 0.1 0.15" radius="0.05" color="black"></a-sphere>
-        <a-sphere position="0.1 0.1 0.15" radius="0.05" color="black"></a-sphere>
-      </a-sphere>
+      
+      <!-- Menu card (simple plane with text) -->
+      <a-plane position="1 0.5 0" width="2" height="1.5" color="lightblue">
+        <a-text value="Menu" position="0 0.6 0" color="black" align="center"></a-text>
+        <!-- Menu items -->
+        <a-text value="1. Pizza" position="0 0.2 0" color="black" align="center"></a-text>
+        <a-text value="2. Burger" position="0 0 0" color="black" align="center"></a-text>
+        <a-text value="3. Pasta" position="0 -0.2 0" color="black" align="center"></a-text>
+      </a-plane>
+
+      <!-- Animated character pointing to the menu -->
+      <a-entity id="character" position="-2 0.5 -2">
+        <!-- Character (yellow ball for head, body, and pointing arm) -->
+        <a-sphere position="0 1 0" radius="0.3" color="yellow"></a-sphere> <!-- Head -->
+        <a-box position="0 -0.5 0" width="0.5" height="1.5" depth="0.5" color="blue"></a-box> <!-- Body -->
+        <a-box position="0 0.5 0.5" width="0.1" height="0.5" depth="0.1" color="yellow"></a-box> <!-- Pointing Finger -->
+      </a-entity>
+
+      <!-- Animation: Make the character point at the menu -->
+      <a-animation 
+        attribute="rotation" 
+        to="0 360 0" 
+        dur="2000" 
+        easing="linear" 
+        repeat="indefinite"></a-animation>
     </a-marker>
 
     <!-- Camera -->
