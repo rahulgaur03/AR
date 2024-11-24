@@ -3,33 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Menu Card</title>
+  <title>AR Emoji Dance</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
-  <a-scene embedded arjs>
-    <!-- Define AR marker, use the 'hiro' marker for simplicity -->
+<body>
+  <a-scene embedded arjs="sourceType: webcam;">
+    <!-- Hiro Marker to trigger AR -->
     <a-marker preset="hiro">
-      <!-- Menu card (a flat rectangular plane) -->
-      <a-plane position="0 0.5 0" width="1" height="1.5" color="lightblue">
-        <a-text value="Sample Menu" position="0 0.5 0" color="black" align="center"></a-text>
-        <!-- Menu items (can be more text or 3D objects inside) -->
-        <a-text value="Item 1: Pizza" position="0 0.2 0" color="black" align="center"></a-text>
-        <a-text value="Item 2: Burger" position="0 0 0" color="black" align="center"></a-text>
-        <a-text value="Item 3: Pasta" position="0 -0.2 0" color="black" align="center"></a-text>
-      </a-plane>
-
-      <!-- Animated character pointing to the menu -->
-      <a-entity id="character" position="1 0.5 -2">
-        <!-- Simple 3D model of an emoji character (replace with any character) -->
-        <a-sphere position="0 0.5 0" radius="0.2" color="yellow"></a-sphere> <!-- emoji head -->
-        <a-box position="0 0 0" width="0.5" height="1.5" depth="0.5" color="blue"></a-box> <!-- body -->
-        <a-box position="0 0.5 0.5" width="0.1" height="0.5" depth="0.1" color="yellow"></a-box> <!-- pointing finger -->
-      </a-entity>
+      <!-- Emoji: Yellow sphere with rotation animation -->
+      <a-sphere position="0 0.5 0" radius="0.3" color="yellow"
+        animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 1000">
+        <!-- Emoji eyes -->
+        <a-sphere position="-0.1 0.1 0.15" radius="0.05" color="black"></a-sphere>
+        <a-sphere position="0.1 0.1 0.15" radius="0.05" color="black"></a-sphere>
+      </a-sphere>
     </a-marker>
 
-    <!-- Camera for AR rendering -->
+    <!-- Camera -->
     <a-entity camera></a-entity>
   </a-scene>
 </body>
